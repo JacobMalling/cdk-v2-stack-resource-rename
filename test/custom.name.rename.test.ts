@@ -1,49 +1,65 @@
-import '@aws-cdk/assert/jest';
-import { Stack } from '@aws-cdk/core';
-import { StackResourceRenamer } from '../src/index';
+import { Stack } from 'aws-cdk-lib';
+import { Template } from 'aws-cdk-lib/assertions';
 import { IntegTesting } from './integ.default';
+import { StackResourceRenamer } from '../src/index';
 
-describe('TestCustomNamesRename', ()=> {
+describe('TestCustomNamesRename', () => {
   let stack: Stack;
 
-  beforeEach(()=>{
+  beforeEach(() => {
     let integ = new IntegTesting();
-    stack=integ.stack[0];
-    let alias='xxx';
+    stack = integ.stack[0];
+    let alias = 'xxx';
     StackResourceRenamer.rename(stack, {
-      rename: (origName, _)=>{
-        return origName+'-'+alias;
+      rename: (origName, _) => {
+        return origName + '-' + alias;
       },
     });
   });
 
   test('test bucket name rename', () => {
-    expect(stack).toHaveResource('AWS::S3::Bucket', {
-      BucketName: 'widget-store-bucket-xxx',
+    const template = Template.fromStack(stack);
+    template.hasResource('AWS::S3::Bucket', {
+      Properties: {
+        BucketName: 'widget-store-bucket-xxx',
+      },
     });
   });
 
   test('test lambda function name rename', () => {
-    expect(stack).toHaveResource('AWS::Lambda::Function', {
-      FunctionName: 'handler_func-xxx',
+    const template = Template.fromStack(stack);
+    template.hasResource('AWS::Lambda::Function', {
+      Properties: {
+        FunctionName: 'handler_func-xxx',
+      },
     });
   });
 
   test('test api stage name rename', () => {
-    expect(stack).toHaveResource('AWS::ApiGateway::Stage', {
-      StageName: 'prod-xxx',
+    const template = Template.fromStack(stack);
+    template.hasResource('AWS::ApiGateway::Stage', {
+      Properties: {
+        StageName: 'prod-xxx',
+      },
     });
   });
 
   test('test api name rename', () => {
-    expect(stack).toHaveResource('AWS::ApiGateway::RestApi', {
-      Name: 'Widget Service-xxx',
+    const template = Template.fromStack(stack);
+    template.hasResource('AWS::ApiGateway::RestApi', {
+      Properties: {
+        Name: 'Widget Service-xxx',
+      },
     });
   });
 
   test('test export name rename', () => {
-    expect(stack).toHaveOutput({
-      exportName: 'ApiDns-xxx',
+    const template = Template.fromStack(stack);
+    console.log(template);
+    template.hasOutput('Dns', {
+      Export: {
+        Name: 'ApiDns-xxx',
+      },
     });
   });
 });

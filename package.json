@@ -1,77 +1,81 @@
 {
-  "name": "cdk-stack-resource-rename",
+  "name": "cdk-v2-stack-resource-rename",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yglcode/cdk-stack-resource-rename.git"
+    "url": "https://github.com/JacobMalling/cdk-v2-stack-resource-rename.git"
   },
   "scripts": {
-    "projen": "npx projen",
-    "start": "npx projen start",
-    "clobber": "npx projen clobber",
-    "compile": "npx projen compile",
-    "test:compile": "npx projen test:compile",
-    "test": "npx projen test",
     "build": "npx projen build",
     "bump": "npx projen bump",
-    "release": "npx projen release",
-    "test:watch": "npx projen test:watch",
-    "test:update": "npx projen test:update",
-    "projen:upgrade": "npx projen projen:upgrade",
-    "watch": "npx projen watch",
-    "package": "npx projen package",
-    "eslint": "npx projen eslint",
+    "clobber": "npx projen clobber",
     "compat": "npx projen compat",
-    "docgen": "npx projen docgen"
+    "compile": "npx projen compile",
+    "default": "npx projen default",
+    "docgen": "npx projen docgen",
+    "eject": "npx projen eject",
+    "eslint": "npx projen eslint",
+    "package": "npx projen package",
+    "package-all": "npx projen package-all",
+    "package:js": "npx projen package:js",
+    "post-compile": "npx projen post-compile",
+    "post-upgrade": "npx projen post-upgrade",
+    "pre-compile": "npx projen pre-compile",
+    "release": "npx projen release",
+    "test": "npx projen test",
+    "test:watch": "npx projen test:watch",
+    "unbump": "npx projen unbump",
+    "upgrade": "npx projen upgrade",
+    "watch": "npx projen watch",
+    "projen": "npx projen"
   },
   "author": {
-    "name": "Yigong Liu",
-    "email": "ygl.code@gmail.com",
+    "name": "Jacob Malling-Olesen",
+    "email": "jacob.malling.olesen@gmail.com",
     "organization": false
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.91.0",
-    "@aws-cdk/aws-apigateway": "^1.91.0",
-    "@aws-cdk/aws-lambda": "^1.91.0",
-    "@aws-cdk/aws-s3": "^1.91.0",
-    "@aws-cdk/core": "^1.91.0",
-    "@types/jest": "^26.0.20",
-    "@types/node": "^10.17.0",
-    "@typescript-eslint/eslint-plugin": "^4.16.1",
-    "@typescript-eslint/parser": "^4.16.1",
-    "eslint": "^7.21.0",
-    "eslint-import-resolver-node": "^0.3.4",
-    "eslint-import-resolver-typescript": "^2.4.0",
-    "eslint-plugin-import": "^2.22.1",
-    "jest": "^26.6.3",
-    "jest-junit": "^12",
-    "jsii": "^1.24.0",
-    "jsii-diff": "^1.24.0",
-    "jsii-docgen": "^1.8.63",
-    "jsii-pacmak": "^1.24.0",
-    "json-schema": "^0.3.0",
-    "projen": "^0.17.1",
+    "@types/jest": "^27",
+    "@types/node": "^16 <= 16.18.78",
+    "@typescript-eslint/eslint-plugin": "^6",
+    "@typescript-eslint/parser": "^6",
+    "eslint": "^8",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.1",
+    "jest": "^27",
+    "jest-junit": "^15",
+    "jsii": "1.x",
+    "jsii-diff": "^1.96.0",
+    "jsii-docgen": "^10.3.26",
+    "jsii-pacmak": "^1.96.0",
+    "jsii-rosetta": "1.x",
+    "projen": "^0.80.15",
     "standard-version": "^9",
-    "ts-jest": "^26.5.3",
-    "typescript": "^4.2.3"
+    "ts-jest": "^27",
+    "typescript": "^3.9.10"
   },
   "peerDependencies": {
-    "@aws-cdk/core": "^1.91.0",
-    "constructs": "^3.2.27"
+    "aws-cdk-lib": "^2.135.0",
+    "constructs": "^10.3.0"
   },
   "dependencies": {
-    "@aws-cdk/core": "^1.91.0"
+    "aws-cdk-lib": "^2.135.0",
+    "constructs": "^10.3.0"
   },
-  "bundledDependencies": [],
+  "overrides": {
+    "@types/babel__traverse": "7.18.2",
+    "@types/prettier": "2.6.0"
+  },
   "keywords": [
     "cdk"
   ],
   "main": "lib/index.js",
   "license": "Apache-2.0",
-  "version": "0.0.23",
+  "version": "0.0.0",
   "jest": {
     "testMatch": [
-      "**/__tests__/**/*.ts?(x)",
-      "**/?(*.)+(spec|test).ts?(x)"
+      "<rootDir>/**/*.test.ts",
+      "<rootDir>/src/**/__tests__/**/*.ts?(x)",
+      "<rootDir>/(test|src)/**/*(*.)@(spec|test).ts?(x)"
     ],
     "clearMocks": true,
     "collectCoverage": true,
@@ -79,6 +83,7 @@
       "json",
       "lcov",
       "clover",
+      "cobertura",
       "text"
     ],
     "coverageDirectory": "coverage",
@@ -103,7 +108,7 @@
     "preset": "ts-jest",
     "globals": {
       "ts-jest": {
-        "tsconfig": "tsconfig.jest.json"
+        "tsconfig": "tsconfig.dev.json"
       }
     }
   },
@@ -111,23 +116,7 @@
   "stability": "stable",
   "jsii": {
     "outdir": "dist",
-    "targets": {
-      "java": {
-        "package": "io.github.yglcode.cdkutils.aspects.resourcerename",
-        "maven": {
-          "groupId": "io.github.yglcode.cdkutils.aspects.resourcerename",
-          "artifactId": "cdk-stack-resource-rename"
-        }
-      },
-      "python": {
-        "distName": "cdk-stack-resource-rename",
-        "module": "cdk_stack_resource_rename"
-      },
-      "dotnet": {
-        "namespace": "CdkUtils.Aspects.ResourceRename",
-        "packageId": "CdkUtils.Aspects.ResourceRename"
-      }
-    },
+    "targets": {},
     "tsc": {
       "outDir": "lib",
       "rootDir": "src"

@@ -1,4 +1,5 @@
-import * as cdk from '@aws-cdk/core';
+import { Aspects, IAspect, Stack, Token } from 'aws-cdk-lib';
+import { IConstruct } from 'constructs';
 
 /**
  * Interface of operation used to rename stack and its resources
@@ -65,7 +66,7 @@ export interface RenameProps {
  * physical names, so that a CDK stack can be used to create multiple
  * stacks in same AWS environment.
  */
-export class StackResourceRenamer implements cdk.IAspect {
+export class StackResourceRenamer implements IAspect {
   /**
    * Static method to rename a stack and all its subordinate resources.
    * @param stack The stack (and all its children resources) to be renamed.
@@ -75,8 +76,8 @@ export class StackResourceRenamer implements cdk.IAspect {
    * RenameProps{userCustomNameOnly:false}
    * @param props Properties are set to customize rename operations.
    */
-  static rename(stack: cdk.IConstruct, renameOper: IRenameOperation, props: RenameProps = {}) {
-    cdk.Aspects.of(stack).add(new StackResourceRenamer(renameOper, props));
+  static rename(stack: IConstruct, renameOper: IRenameOperation, props: RenameProps = {}) {
+    Aspects.of(stack).add(new StackResourceRenamer(renameOper, props));
   }
 
   //mapping for resources whose physical names donot follow
@@ -111,7 +112,7 @@ export class StackResourceRenamer implements cdk.IAspect {
     }
     this.excludeResTypes = props.excludeResourceTypes;
     this.includeResTypes = props.includeResourceTypes;
-    if (props.userCustomNameOnly!==undefined) {
+    if (props.userCustomNameOnly !== undefined) {
       this.customNameOnly = props.userCustomNameOnly;
     }
   }
@@ -119,8 +120,8 @@ export class StackResourceRenamer implements cdk.IAspect {
    * Implement core.IAspect interface
    * @param node CFN resources to be renamed.
    */
-  visit(node: cdk.IConstruct): void {
-    if (node instanceof cdk.Stack) {
+  visit(node: IConstruct): void {
+    if (node instanceof Stack) {
       //rename stack
       this.renameResource(node, 'Stack');
     } else {
@@ -136,7 +137,7 @@ export class StackResourceRenamer implements cdk.IAspect {
    * @param node CFN resource or stack.
    * @param resTypeName The type name of CFN resource.
    */
-  protected renameResource(node: cdk.IConstruct, resTypeName: string) {
+  protected renameResource(node: IConstruct, resTypeName: string) {
     //check include/exclude
     if (this.excludeResTypes && this.excludeResTypes.length > 0 &&
       this.excludeResTypes.indexOf(resTypeName) !== -1) {
@@ -179,7 +180,7 @@ export class StackResourceRenamer implements cdk.IAspect {
    * check if a resName(resource name) is a valid target for rename;
    */
   protected isTarget(resName: any): boolean {
-    let isAWSGenerated = cdk.Token.isUnresolved(resName);
+    let isAWSGenerated = Token.isUnresolved(resName);
     if (this.customNameOnly && isAWSGenerated) {
       return false;
     }
@@ -188,15 +189,15 @@ export class StackResourceRenamer implements cdk.IAspect {
 }
 
 function isWritable<T extends Object>(obj: T, key: keyof T): boolean {
-  let desc: PropertyDescriptor|undefined;
+  let desc: PropertyDescriptor | undefined;
   for (let o = obj; o != Object.prototype; o = Object.getPrototypeOf(o)) {
     desc = Object.getOwnPropertyDescriptor(o, key);
     if (desc !== undefined) {
       break;
     }
   }
-  if (desc===undefined) {
-    desc={};
+  if (desc === undefined) {
+    desc = {};
   }
   return Boolean(desc.writable);
 }

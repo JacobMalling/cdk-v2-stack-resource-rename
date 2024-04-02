@@ -1,16 +1,9 @@
-[![NPM version](https://badge.fury.io/js/cdk-stack-resource-rename.svg)](https://badge.fury.io/js/cdk-stack-resource-rename)
-[![PyPI version](https://badge.fury.io/py/cdk-stack-resource-rename.svg)](https://badge.fury.io/py/cdk-stack-resource-rename)
-[![Nuget version](https://badge.fury.io/nu/cdk-stack-resource-rename.svg)](https://badge.fury.io/nu/CdkUtils.Aspects.ResourceRename)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.yglcode.cdkutils.aspects.resourcerename/cdk-stack-resource-rename/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/io.github.yglcode.cdkutils.aspects.resourcerename/cdk-stack-resource-rename)
-![Release](https://github.com/yglcode/cdk-stack-resource-rename/workflows/Release/badge.svg)
 
+## Originial repository that works for CDK v1: https://github.com/yglcode/cdk-stack-resource-rename
 
-## StackResourceRenamer
+## StackResourceRenamer for CDK v2
 
 #### A CDK aspect, StackResourceRenamer renames CDK stack name and stack's subordinate resources' physical names, so that a CDK stack can be used to create multiple stacks in same AWS environment without confliction.
-
-
-### API: [API.md](https://github.com/yglcode/cdk-stack-resource-rename/blob/main/API.md)
 
 Two main use cases:
 
@@ -57,63 +50,6 @@ const bucket = new s3.Bucket(stack, 'bucket', {
     bucketName: 'my-bucket',
 });
 ... 
-```
-*python*
-```python
-from cdk_stack_resource_rename import (StackResourceRenamer, IRenameOperation)
-
-@jsii.implements(IRenameOperation)
-class RenameOper:
-    def __init__(self, alias):
-        self.alias=alias
-    def rename(self, resName, typeName):
-        return resName+'-'+self.alias
-
-class AppStack(core.Stack):
-    def __init__(self, scope: core.Construct, construct_id: str, **kwargs) -> None:
-        ......
-        alias = self.node.try_get_context("alias")
-        if alias != None:
-            # if alias is defined, rename stack/resources' custom names
-            StackResourceRenamer.rename(self, RenameOper(alias))
-```
-*java*
-```java
-import io.github.yglcode.cdkutils.aspects.resourcerename.StackResourceRenamer;
-import io.github.yglcode.cdkutils.aspects.resourcerename.IRenameOperation;
-
-public class AppStack extends Stack {
-    ......
-    String alias = (String) this.getNode().tryGetContext("alias");
-    if (alias != null) {
-        StackResourceRenamer.rename(this, new IRenameOperation() {
-            public String rename(String resName, String typeName) {
-                return resName + "-"+alias;
-            }
-        });
-    }
-```
-*csharp*
-```csharp
-using CdkUtils.Aspects.ResourceRename;
-public class RenameOper: Amazon.JSII.Runtime.Deputy.DeputyBase, IRenameOperation {
-    private string alias;
-    public RenameOper(string alias) {
-        this.alias=alias;
-    }
-    public string Rename(string resName, string typeName) {
-        return resName+"-"+alias;
-    }
-}
-public class AppStack : Stack
-{
-    internal AppStack(Construct scope, string id, IStackProps props = null) : base(scope, id, props)
-    {
-        ......
-        var alias = (string)this.Node.TryGetContext("alias");
-        if (alias!=null) {
-            StackResourceRenamer.Rename(this, new RenameOper(alias));
-        }            
 ```
 To create multiple stacks:
 

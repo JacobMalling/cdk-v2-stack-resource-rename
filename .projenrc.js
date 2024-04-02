@@ -1,53 +1,25 @@
-const { AwsCdkConstructLibrary } = require('projen');
+const { AwsCdkConstructLibrary } = require('projen/lib/awscdk');
+const { NodePackageManager } = require('projen/lib/javascript');
 
 const project = new AwsCdkConstructLibrary({
-  author: 'Yigong Liu',
-  authorAddress: 'ygl.code@gmail.com',
-  cdkVersion: '1.91.0',
+  author: 'Jacob Malling-Olesen',
+  authorAddress: 'jacob.malling.olesen@gmail.com',
   defaultReleaseBranch: 'main',
-  jsiiFqn: 'projen.AwsCdkConstructLibrary',
-  name: 'cdk-stack-resource-rename',
-  repositoryUrl: 'https://github.com/yglcode/cdk-stack-resource-rename.git',
-
+  cdkVersion: '2.135.0',
+  name: 'cdk-v2-stack-resource-rename',
+  repositoryUrl: 'https://github.com/JacobMalling/cdk-v2-stack-resource-rename.git',
+  license: 'Apache-2.0',
   deps: [
-    '@aws-cdk/core',
+    'aws-cdk-lib',
+    'constructs',
   ],
-
-  devDeps: [
-    '@aws-cdk/core',
-    '@aws-cdk/aws-apigateway',
-    '@aws-cdk/aws-lambda',
-    '@aws-cdk/aws-s3',
-  ],
-
-  peerDeps: [
-    '@aws-cdk/core',
-  ],
-
-  releaseBranches: ['main'],
-
-  publishToMaven: {
-    javaPackage: 'io.github.yglcode.cdkutils.aspects.resourcerename',
-    mavenGroupId: 'io.github.yglcode.cdkutils.aspects.resourcerename',
-    mavenArtifactId: 'cdk-stack-resource-rename',
-    mavenEndpoint: 'https://s01.oss.sonatype.org',
-  },
-
-  publishToPypi: {
-    distName: 'cdk-stack-resource-rename',
-    module: 'cdk_stack_resource_rename',
-  },
-
-  publishToNuget: {
-    dotNetNamespace: 'CdkUtils.Aspects.ResourceRename',
-    packageId: 'CdkUtils.Aspects.ResourceRename',
+  constructsVersion: '10.3.0',
+  packageManager: NodePackageManager.NPM,
+  jestOptions: {
+    jestConfig: {
+      testMatch: ['<rootDir>/**/*.test.ts'],
+    },
   },
 });
-
-const common_exclude = [
-  'cdk.out', 'cdk.context.json', 'images', 'yarn-error.log',
-];
-project.npmignore.exclude(...common_exclude, 'maven_release*');
-project.gitignore.exclude(...common_exclude);
 
 project.synth();

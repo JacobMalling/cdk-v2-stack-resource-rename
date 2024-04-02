@@ -1,49 +1,23 @@
 {
   "dependencies": [
     {
-      "name": "@aws-cdk/assert",
-      "version": "^1.91.0",
-      "type": "build"
-    },
-    {
-      "name": "@aws-cdk/aws-apigateway",
-      "type": "build"
-    },
-    {
-      "name": "@aws-cdk/aws-lambda",
-      "type": "build"
-    },
-    {
-      "name": "@aws-cdk/aws-s3",
-      "type": "build"
-    },
-    {
-      "name": "@aws-cdk/core",
-      "type": "build"
-    },
-    {
       "name": "@types/jest",
+      "version": "^27",
       "type": "build"
     },
     {
       "name": "@types/node",
-      "version": "^10.17.0",
+      "version": "^16 <= 16.18.78",
       "type": "build"
     },
     {
       "name": "@typescript-eslint/eslint-plugin",
+      "version": "^6",
       "type": "build"
     },
     {
       "name": "@typescript-eslint/parser",
-      "type": "build"
-    },
-    {
-      "name": "eslint",
-      "type": "build"
-    },
-    {
-      "name": "eslint-import-resolver-node",
+      "version": "^6",
       "type": "build"
     },
     {
@@ -55,16 +29,18 @@
       "type": "build"
     },
     {
-      "name": "jest",
+      "name": "eslint",
+      "version": "^8",
       "type": "build"
     },
     {
       "name": "jest-junit",
-      "version": "^12",
+      "version": "^15",
       "type": "build"
     },
     {
-      "name": "jsii",
+      "name": "jest",
+      "version": "^27",
       "type": "build"
     },
     {
@@ -80,12 +56,17 @@
       "type": "build"
     },
     {
-      "name": "json-schema",
+      "name": "jsii-rosetta",
+      "version": "1.x",
+      "type": "build"
+    },
+    {
+      "name": "jsii",
+      "version": "1.x",
       "type": "build"
     },
     {
       "name": "projen",
-      "version": "^0.17.1",
       "type": "build"
     },
     {
@@ -95,6 +76,7 @@
     },
     {
       "name": "ts-jest",
+      "version": "^27",
       "type": "build"
     },
     {
@@ -102,16 +84,31 @@
       "type": "build"
     },
     {
-      "name": "@aws-cdk/core",
+      "name": "@types/babel__traverse",
+      "version": "7.18.2",
+      "type": "override"
+    },
+    {
+      "name": "@types/prettier",
+      "version": "2.6.0",
+      "type": "override"
+    },
+    {
+      "name": "aws-cdk-lib",
+      "version": "^2.135.0",
       "type": "peer"
     },
     {
       "name": "constructs",
-      "version": "^3.2.27",
+      "version": "^10.3.0",
       "type": "peer"
     },
     {
-      "name": "@aws-cdk/core",
+      "name": "aws-cdk-lib",
+      "type": "runtime"
+    },
+    {
+      "name": "constructs",
       "type": "runtime"
     }
   ],
