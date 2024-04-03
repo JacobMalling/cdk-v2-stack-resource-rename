@@ -1,34 +1,48 @@
-
 ## Originial repository that works for CDK v1: https://github.com/yglcode/cdk-stack-resource-rename
 
-## StackResourceRenamer for CDK v2
+## StackResourceRenamer for CDK v2 for typescript
 
 #### A CDK aspect, StackResourceRenamer renames CDK stack name and stack's subordinate resources' physical names, so that a CDK stack can be used to create multiple stacks in same AWS environment without confliction.
 
 Two main use cases:
 
 1. rename custom resources names in stack, so that stack can be reused and replicated:
+
 ```ts
 StackResourceRenamer.rename(stack, {
-    rename: (resName, _)=>{
-        return resName+'-'+alias;
-    },
+  rename: (resName, _) => {
+    return resName + "-" + alias;
+  },
 });
 ```
 
 2. for resources without custom name, which by default will use unique id AWS auto generate as its physical id, we can create a more readable and identifiable name, for testing, debugging or metrics monitoring environments.
+
 ```ts
-StackResourceRenamer.rename(stack, {
-    rename: (_, typeName)=>{
-        counts[typeName]++;
-        return projectName+'-'+serviceName+'-'+typeName+'-'+counts[typeName];
+StackResourceRenamer.rename(
+  stack,
+  {
+    rename: (_, typeName) => {
+      counts[typeName]++;
+      return (
+        projectName +
+        "-" +
+        serviceName +
+        "-" +
+        typeName +
+        "-" +
+        counts[typeName]
+      );
     },
-}, { userCustomNameOnly: false });
+  },
+  { userCustomNameOnly: false }
+);
 ```
 
 ### Samples
 
-*typescript*
+_typescript_
+
 ```ts
 import { StackResourceRenamer } from 'cdk-stack-resource-rename';
 
@@ -49,8 +63,9 @@ if (alias) {
 const bucket = new s3.Bucket(stack, 'bucket', {
     bucketName: 'my-bucket',
 });
-... 
+...
 ```
+
 To create multiple stacks:
 
 `cdk -c alias=a1 deploy  `

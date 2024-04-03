@@ -6,7 +6,7 @@ const project = new AwsCdkConstructLibrary({
   authorAddress: 'jacob.malling.olesen@gmail.com',
   defaultReleaseBranch: 'main',
   cdkVersion: '2.135.0',
-  name: 'cdk-v2-stack-resource-rename',
+  name: 'cdk-v2-stack-resource-rename-typescript',
   repositoryUrl: 'https://github.com/JacobMalling/cdk-v2-stack-resource-rename.git',
   license: 'Apache-2.0',
   deps: [

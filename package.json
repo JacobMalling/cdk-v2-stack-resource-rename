@@ -1,5 +1,5 @@
 {
-  "name": "cdk-v2-stack-resource-rename",
+  "name": "cdk-v2-stack-resource-rename-typescript",
   "repository": {
     "type": "git",
     "url": "https://github.com/JacobMalling/cdk-v2-stack-resource-rename.git"
