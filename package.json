@@ -2,7 +2,7 @@
   "name": "cdk-v2-stack-resource-rename-typescript",
   "repository": {
     "type": "git",
-    "url": "https://github.com/JacobMalling/cdk-v2-stack-resource-rename.git"
+    "url": "https://github.com/luxionkeyshot/cdk-v2-stack-resource-rename-NODEJS.git"
   },
   "scripts": {
     "build": "npx projen build",

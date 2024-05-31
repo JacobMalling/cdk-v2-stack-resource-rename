@@ -1,7 +1,8 @@
 const { AwsCdkConstructLibrary } = require('projen/lib/awscdk');
-const { NodePackageManager } = require('projen/lib/javascript');
+const { NodePackageManager, NpmAccess } = require('projen/lib/javascript');
 
 const project = new AwsCdkConstructLibrary({
+  npmAccess: NpmAccess.PUBLIC,
   author: 'KeyShot',
   authorAddress: 'open-source-maintainers@keyshot.com',
   defaultReleaseBranch: 'main',
