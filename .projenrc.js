@@ -2,12 +2,12 @@ const { AwsCdkConstructLibrary } = require('projen/lib/awscdk');
 const { NodePackageManager } = require('projen/lib/javascript');
 
 const project = new AwsCdkConstructLibrary({
-  author: 'Jacob Malling-Olesen',
-  authorAddress: 'jacob.malling.olesen@gmail.com',
+  author: 'KeyShot',
+  authorAddress: 'open-source-maintainers@keyshot.com',
   defaultReleaseBranch: 'main',
   cdkVersion: '2.135.0',
   name: 'cdk-v2-stack-resource-rename-typescript',
-  repositoryUrl: 'https://github.com/JacobMalling/cdk-v2-stack-resource-rename.git',
+  repositoryUrl: 'https://github.com/luxionkeyshot/cdk-v2-stack-resource-rename-NODEJS.git',
   license: 'Apache-2.0',
   deps: [
     'aws-cdk-lib',

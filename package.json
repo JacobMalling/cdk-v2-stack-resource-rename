@@ -29,8 +29,8 @@
     "projen": "npx projen"
   },
   "author": {
-    "name": "Jacob Malling-Olesen",
-    "email": "jacob.malling.olesen@gmail.com",
+    "name": "KeyShot",
+    "email": "open-source-maintainers@keyshot.com",
     "organization": false
   },
   "devDependencies": {
