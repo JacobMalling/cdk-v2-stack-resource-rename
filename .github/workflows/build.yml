@@ -25,6 +25,8 @@ jobs:
           node-version: 18.x
       - name: Install dependencies
         run: npm install
+        with: 
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
       - name: build
         run: npx projen build
       - name: Find mutations
