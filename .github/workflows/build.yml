@@ -23,10 +23,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18.x
+          registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies
         run: npm install
-        env: 
-          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
       - name: build
         run: npx projen build
       - name: Find mutations

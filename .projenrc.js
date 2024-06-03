@@ -2,6 +2,7 @@ const { AwsCdkConstructLibrary } = require('projen/lib/awscdk');
 const { NodePackageManager } = require('projen/lib/javascript');
 
 const project = new AwsCdkConstructLibrary({
+  npmRegistryUrl: 'https://registry.npmjs.org',
   jsiiVersion: '~5.4.0',
   docgen: false,
   author: 'KeyShot',
