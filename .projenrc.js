@@ -8,7 +8,7 @@ const project = new AwsCdkConstructLibrary({
       {
         name: 'Install dependencies',
         run: 'npm install',
-        with: {
+        env: {
           NPM_TOKEN: '${{secrets-NPM_TOKEN}}',
         },
       },
