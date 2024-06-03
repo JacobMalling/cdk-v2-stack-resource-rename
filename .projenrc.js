@@ -3,6 +3,17 @@ const { NodePackageManager } = require('projen/lib/javascript');
 
 const project = new AwsCdkConstructLibrary({
   npmRegistryUrl: 'https://registry.npmjs.org',
+  buildWorkflowOptions: {
+    preBuildSteps: [
+      {
+        name: 'Install dependencies',
+        run: 'npm install',
+        with: {
+          NPM_TOKEN: '${{secrets-NPM_TOKEN}}',
+        },
+      },
+    ],
+  },
   jsiiVersion: '~5.4.0',
   docgen: false,
   author: 'KeyShot',
