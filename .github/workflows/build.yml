@@ -24,8 +24,6 @@ jobs:
         with:
           node-version: 18.x
       - name: Install dependencies
-        env:
-          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
         run: npm install
       - name: build
         run: npx projen build
