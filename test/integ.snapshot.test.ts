@@ -1,6 +1,6 @@
 import { Template } from 'aws-cdk-lib/assertions';
-import { StackResourceRenamer } from '../src/index';
 import { IntegTesting } from './integ.default';
+import { StackResourceRenamer } from '../src/index';
 
 test('integ snapshot validation', () => {
   const integ = new IntegTesting();
