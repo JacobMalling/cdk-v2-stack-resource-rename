@@ -21,6 +21,7 @@
     "pre-compile": "npx projen pre-compile",
     "release": "npx projen release",
     "test": "npx projen test",
+    "test:update": "npx projen test:update",
     "test:watch": "npx projen test:watch",
     "unbump": "npx projen unbump",
     "upgrade": "npx projen upgrade",
@@ -35,9 +36,9 @@
   "devDependencies": {
     "@types/jest": "^27",
     "@types/node": "^18",
-    "@typescript-eslint/eslint-plugin": "^6",
-    "@typescript-eslint/parser": "^6",
-    "aws-cdk-lib": "2.135.0",
+    "@typescript-eslint/eslint-plugin": "^7",
+    "@typescript-eslint/parser": "^7",
+    "aws-cdk-lib": "2.146.0",
     "constructs": "10.3.0",
     "eslint": "^8",
     "eslint-import-resolver-typescript": "^3.6.1",
@@ -54,7 +55,7 @@
     "typescript": "^3.9.10"
   },
   "peerDependencies": {
-    "aws-cdk-lib": "^2.135.0",
+    "aws-cdk-lib": "^2.146.0",
     "constructs": "^10.3.0"
   },
   "keywords": [
@@ -63,7 +64,6 @@
   "main": "lib/index.js",
   "license": "Apache-2.0",
   "publishConfig": {
-    "registry": "https://npmjs.com/",
     "access": "public"
   },
   "version": "0.0.0",
