@@ -1,33 +1,33 @@
-import * as apigateway from '@aws-cdk/aws-apigateway';
-import * as lambda from '@aws-cdk/aws-lambda';
-import * as s3 from '@aws-cdk/aws-s3';
-import * as core from '@aws-cdk/core';
+import { App, CfnOutput, Stack } from 'aws-cdk-lib';
+import { LambdaIntegration, RestApi } from 'aws-cdk-lib/aws-apigateway';
+import { Code, Runtime, Function } from 'aws-cdk-lib/aws-lambda';
+import { Bucket } from 'aws-cdk-lib/aws-s3';
 
 export class IntegTesting {
-  readonly stack: core.Stack[]
+  readonly stack: Stack[];
   constructor() {
-    const app = new core.App();
+    const app = new App();
 
     const env = {
       region: process.env.CDK_DEFAULT_REGION,
       account: process.env.CDK_DEFAULT_ACCOUNT,
     };
 
-    const stack = new core.Stack(app, 'integration-stack', { env });
+    const stack = new Stack(app, 'integration-stack', { env });
 
     //for integration test
     this.stack = [stack];
 
     //resources in stack
-    const bucket = new s3.Bucket(stack, 'WidgetStore', {
+    const bucket = new Bucket(stack, 'WidgetStore', {
       bucketName: 'widget-store-bucket',
     });
 
-    const handler = new lambda.Function(stack, 'WidgetHandler', {
-      runtime: lambda.Runtime.NODEJS_10_X,
+    const handler = new Function(stack, 'WidgetHandler', {
+      runtime: Runtime.NODEJS_20_X,
       handler: 'index.handler',
       functionName: 'handler_func',
-      code: lambda.Code.fromInline(`
+      code: Code.fromInline(`
                 exports.handler = async (event)=> {
                     console.log('event: ',event,' env: ',process.env);
                 }
@@ -39,12 +39,12 @@ export class IntegTesting {
 
     bucket.grantReadWrite(handler);
 
-    const api = new apigateway.RestApi(stack, 'widgets-api', {
+    const api = new RestApi(stack, 'widgets-api', {
       restApiName: 'Widget Service',
       description: 'serves widgets',
     });
 
-    const getBind = new apigateway.LambdaIntegration(handler, {
+    const getBind = new LambdaIntegration(handler, {
       requestTemplates: { 'application/json': '{"statusCode": "200"}' },
     });
 
@@ -52,7 +52,7 @@ export class IntegTesting {
       operationName: 'get-widget',
     });
 
-    new core.CfnOutput(stack, 'Dns', {
+    new CfnOutput(stack, 'Dns', {
       exportName: 'ApiDns',
       value: api.url,
     });
