@@ -10,11 +10,10 @@ const project = new awscdk.AwsCdkConstructLibrary({
   repositoryUrl: 'https://github.com/luxionkeyshot/cdk-v2-stack-resource-rename-NODEJS.git',
   license: 'Apache-2.0',
   jsiiVersion: '~5.4.0',
-  cdkVersion: '2.146.0',
-  constructsVersion: '10.3.0',
-  typescriptVersion: '4.9.5',
+  cdkVersion: '2.80.0',
+  constructsVersion: '10.0.3',
+  typescriptVersion: '~4.7.4',
   jestOptions: {
-    updateSnapshot: 'NEVER',
     jestConfig: {
       testMatch: ['<rootDir>/**/*.test.ts'],
     },

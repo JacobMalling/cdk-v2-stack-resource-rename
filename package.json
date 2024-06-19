@@ -21,7 +21,6 @@
     "pre-compile": "npx projen pre-compile",
     "release": "npx projen release",
     "test": "npx projen test",
-    "test:update": "npx projen test:update",
     "test:watch": "npx projen test:watch",
     "unbump": "npx projen unbump",
     "upgrade": "npx projen upgrade",
@@ -38,8 +37,8 @@
     "@types/node": "^18",
     "@typescript-eslint/eslint-plugin": "^7",
     "@typescript-eslint/parser": "^7",
-    "aws-cdk-lib": "2.146.0",
-    "constructs": "10.3.0",
+    "aws-cdk-lib": "2.80.0",
+    "constructs": "10.0.3",
     "eslint": "^8",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.1",
@@ -52,11 +51,11 @@
     "projen": "^0.82.6",
     "standard-version": "^9",
     "ts-jest": "^27",
-    "typescript": "4.9.5"
+    "typescript": "~4.7.4"
   },
   "peerDependencies": {
-    "aws-cdk-lib": "^2.146.0",
-    "constructs": "^10.3.0"
+    "aws-cdk-lib": "^2.80.0",
+    "constructs": "^10.0.3"
   },
   "keywords": [
     "cdk"

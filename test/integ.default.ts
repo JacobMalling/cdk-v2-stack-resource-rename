@@ -1,6 +1,6 @@
 import { App, CfnOutput, Stack } from 'aws-cdk-lib';
 import { LambdaIntegration, RestApi } from 'aws-cdk-lib/aws-apigateway';
-import { Code, Runtime, Function } from 'aws-cdk-lib/aws-lambda';
+import { Code, Function, Runtime } from 'aws-cdk-lib/aws-lambda';
 import { Bucket } from 'aws-cdk-lib/aws-s3';
 
 export class IntegTesting {
@@ -24,7 +24,7 @@ export class IntegTesting {
     });
 
     const handler = new Function(stack, 'WidgetHandler', {
-      runtime: Runtime.NODEJS_20_X,
+      runtime: Runtime.NODEJS_18_X,
       handler: 'index.handler',
       functionName: 'handler_func',
       code: Code.fromInline(`
