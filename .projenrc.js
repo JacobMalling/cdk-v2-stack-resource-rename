@@ -1,7 +1,6 @@
 const { awscdk } = require('projen');
 
 const project = new awscdk.AwsCdkConstructLibrary({
-  prerelease: 'beta',
   docgen: false,
   author: 'KeyShot',
   authorAddress: 'open-source-maintainers@keyshot.com',
